@@ -11,7 +11,7 @@ export async function addBrand(
   try {
     const brand = new Brand(req.body.title);
     const brandRepo = new BrandRepository();
-    const data = await brandRepo.create(brand);
+    const data = await brandRepo.newBrand(brand);
     res.json(data);
   } catch (error) {
     next(ERROR.HTTP_500);

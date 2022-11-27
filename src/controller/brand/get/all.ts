@@ -9,7 +9,7 @@ export async function getAllBrands(
 ): Promise<void> {
   try {
     const brandRepo = new BrandRepository();
-    const data = await brandRepo.findAll();
+    const data = await brandRepo.findAllBrands();
     res.json(data);
   } catch (error) {
     next(ERROR.HTTP_500);

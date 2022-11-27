@@ -1,4 +1,5 @@
 import { ERROR } from '@const';
+import { isUndefinedOrNull } from '@middleware';
 import { BrandRepository } from '@repository';
 import { NextFunction, Request, Response } from 'express';
 
@@ -9,8 +10,11 @@ export async function getBrandById(
 ): Promise<void> {
   try {
     const brandRepo = new BrandRepository();
-    const data = await brandRepo.find(req.params.id);
-    res.json(data);
+    if(!isUndefinedOrNull(req.params.id)){
+      const data = await brandRepo.findBrand(req.params.id);
+      res.json(data);    
+    }
+    throw new Error("ID Brand unknown");
   } catch (error) {
     next(ERROR.HTTP_500);
   }
